@@ -64,6 +64,87 @@ namespace
         defeat
     };
 
+    enum class language : uint8_t
+    {
+        spanish,
+        english
+    };
+
+    enum class text_id : uint8_t
+    {
+        seek_threshold,
+        title_subtitle,
+        title_genre,
+        title_start,
+        title_peace_seed,
+        title_language,
+        pilgrim_title,
+        pilgrim_change,
+        pilgrim_confirm,
+        lore_title,
+        action_enter,
+        action_title,
+        lore_controls,
+        hud_dwelling_label,
+        hud_key_marker,
+        hud_mercy_label,
+        help_controls,
+        pause,
+        dungeon_regenerated,
+        resume_path,
+        silence_threshold_hint,
+        wall_teaches,
+        missing_key,
+        shrine_prompt,
+        silence_heavy,
+        bread,
+        candle,
+        inner_key,
+        resolution,
+        strike_no_discern,
+        no_light,
+        mercy_light,
+        light_discerns,
+        threshold_yields,
+        shrine_restored,
+        remain,
+        silence_light,
+        noise_near,
+        call_east,
+        call_west,
+        call_south,
+        call_north,
+        call_here,
+        no_memory,
+        false_door_hurts,
+        hope_rises,
+        beast_hits,
+        shadow_hurts,
+        noise_drains,
+        boss_intro,
+        boss_title,
+        boss_seals_label,
+        boss_silence_window,
+        boss_noise_window,
+        boss_controls,
+        true_silence,
+        still_noise,
+        door_empties,
+        prayer_hurts,
+        hit_feeds,
+        noise_bites,
+        boss_memory_good,
+        boss_memory_low,
+        victory_title,
+        victory_restart,
+        defeat_title,
+        defeat_fall,
+        defeat_retry,
+        defeat_hint_no_light,
+        defeat_hint_haste,
+        defeat_hint_shadow
+    };
+
     enum class tile_kind : uint8_t
     {
         wall,
@@ -122,6 +203,12 @@ namespace
         bool active = false;
     };
 
+    struct localized_text
+    {
+        const char* es;
+        const char* en;
+    };
+
     int abs_int(int value)
     {
         return value < 0 ? -value : value;
@@ -156,48 +243,122 @@ namespace
         "I", "II", "III", "IV", "V", "VI", "VII"
     };
 
-    constexpr const char* pilgrim_names[] = {
-        "FE",
-        "ESPERANZA",
-        "CARIDAD",
-        "PAZ"
+    constexpr localized_text text_table[] = {
+        { "Busca el umbral.", "Seek the threshold." },
+        { "Regreso a la casa", "Return to the house" },
+        { "Roguelike interior", "Interior roguelike" },
+        { "A: peregrinar", "A: begin pilgrimage" },
+        { "B: semilla paz", "B: peace seed" },
+        { "SELECT: English", "SELECT: ESPANOL" },
+        { "NOMBRE DEL PEREGRINO", "PILGRIM NAME" },
+        { "LEFT/RIGHT cambia", "LEFT/RIGHT change" },
+        { "A confirma", "A confirm" },
+        { "CASTILLO INTERIOR", "INTERIOR CASTLE" },
+        { "A: entrar", "A: enter" },
+        { "B: titulo", "B: title" },
+        { "R: callar / L: memoria", "R: silence / L: memory" },
+        { " M", " D" },
+        { " LL", " KEY" },
+        { " P", " MER" },
+        { "D andar A golpe B luz", "D move A hit B pray" },
+        { "PAUSA A seguir B titulo", "PAUSE A resume B title" },
+        { "La morada se rehace.", "Dwelling remade." },
+        { "Regresa al camino.", "Back to the path." },
+        { "R frente al umbral.", "R faces threshold." },
+        { "La piedra ensena.", "Stone teaches." },
+        { "Falta la llave interior.", "Need inner key." },
+        { "R: orar tres turnos.", "R: pray three turns." },
+        { "Aqui pesa el silencio.", "Silence is heavy here." },
+        { "Pan para el camino.", "Bread for the road." },
+        { "Luz recibida.", "Light received." },
+        { "Llave interior.", "Inner key." },
+        { "Resolucion.", "Resolve." },
+        { "El golpe no discierne.", "A blow cannot discern." },
+        { "Falta luz.", "Need light." },
+        { "Misericordia y luz.", "Mercy and light." },
+        { "La luz discierne.", "Light discerns." },
+        { "El umbral cede.", "The threshold yields." },
+        { "Silencio restaurado.", "Silence restores." },
+        { "Permanece.", "Remain." },
+        { "Callar da luz.", "Silence gives light." },
+        { "Hay ruido cerca.", "Noise is near." },
+        { "La llamada va al ESTE.", "Call goes EAST." },
+        { "La llamada va al OESTE.", "Call goes WEST." },
+        { "La llamada va al SUR.", "Call goes SOUTH." },
+        { "La llamada va al NORTE.", "Call goes NORTH." },
+        { "La llamada esta aqui.", "The call is here." },
+        { "Aun no hay memoria.", "No memory yet." },
+        { "La puerta falsa hiere.", "False door hurts." },
+        { "Esperanza levanta.", "Hope lifts you." },
+        { "La bestia golpea.", "The beast strikes." },
+        { "La sombra hiere.", "The shadow hurts." },
+        { "El ruido apaga luz.", "Noise dims light." },
+        { "No toda puerta es casa.", "Not every door is home." },
+        { "LA PUERTA FALSA", "THE FALSE DOOR" },
+        { " SELLOS", " SEALS" },
+        { "VENTANA DE SILENCIO", "SILENCE WINDOW" },
+        { "RUIDO: no ataques", "NOISE: do not attack" },
+        { "R calla  B ora  A hiere", "R hush  B pray  A hurts" },
+        { "Silencio verdadero.", "True silence." },
+        { "Aun hay ruido.", "Noise remains." },
+        { "La puerta se vacia.", "The door empties." },
+        { "Orar sin oir duele.", "Pray unheard hurts." },
+        { "Golpear la alimenta.", "Striking feeds it." },
+        { "El ruido muerde.", "Noise bites." },
+        { "Las memorias reconocen.", "Memories recognize." },
+        { "Pocas memorias alumbran.", "Few memories shine." },
+        { "HAS VUELTO A CASA", "YOU HAVE COME HOME" },
+        { "A: otra peregrinacion", "A: another pilgrimage" },
+        { "NOCHE INTERIOR", "INNER NIGHT" },
+        { "Caer no es perderse.", "Falling is not lost." },
+        { "A: repetir morada", "A: retry dwelling" },
+        { "La fuente no se fuerza.", "The spring is not forced." },
+        { "La prisa apago la lampara.", "Haste dimmed the lamp." },
+        { "Nombrar la sombra ayuda.", "Name the shadow." }
     };
 
-    constexpr const char* pilgrim_rules[] = {
-        "+1 luz maxima.",
-        "Una caida te levanta.",
-        "La oracion pacifica.",
-        "Menos ruido enemigo."
+    constexpr localized_text pilgrim_names[] = {
+        { "FE", "FAITH" },
+        { "ESPERANZA", "HOPE" },
+        { "CARIDAD", "CHARITY" },
+        { "PAZ", "PEACE" }
     };
 
-    constexpr const char* dwelling_lore[] = {
-        "I  Conocerse abre.",
-        "II La llamada orienta.",
-        "III La regla sostiene.",
-        "IV La quietud revela.",
-        "V  Confiar es andar.",
-        "VI El fuego purifica.",
-        "VII La casa llama."
+    constexpr localized_text pilgrim_rules[] = {
+        { "+1 luz maxima.", "+1 max light." },
+        { "Una caida te levanta.", "One fall lifts you." },
+        { "La oracion pacifica.", "Prayer pacifies." },
+        { "Menos ruido enemigo.", "Foes sense less." }
     };
 
-    constexpr const char* dwelling_rules[] = {
-        "Aprende limites y luz.",
-        "R escucha la llamada.",
-        "Recursos escasos.",
-        "R recupera luz segura.",
-        "Puertas falsas abundan.",
-        "Bestias guardan umbrales.",
-        "Discierne la puerta."
+    constexpr localized_text dwelling_lore[] = {
+        { "I  Conocerse abre.", "I  Knowing opens." },
+        { "II La llamada orienta.", "II The call points." },
+        { "III La regla sostiene.", "III The rule sustains." },
+        { "IV La quietud revela.", "IV Stillness reveals." },
+        { "V  Confiar es andar.", "V  Trust is walking." },
+        { "VI El fuego purifica.", "VI Fire purifies." },
+        { "VII La casa llama.", "VII Home calls." }
     };
 
-    constexpr const char* memory_texts[] = {
-        "No estaba lejos.",
-        "La voz no grita.",
-        "La regla no encierra.",
-        "Callar tambien anda.",
-        "La luz basta cerca.",
-        "El deseo se limpia.",
-        "Era hondo."
+    constexpr localized_text dwelling_rules[] = {
+        { "Aprende limites y luz.", "Learn limits and light." },
+        { "R escucha la llamada.", "R hears the call." },
+        { "Recursos escasos.", "Resources are scarce." },
+        { "R recupera luz segura.", "R restores safe light." },
+        { "Puertas falsas abundan.", "False doors abound." },
+        { "Bestias guardan umbrales.", "Beasts guard thresholds." },
+        { "Discierne la puerta.", "Discern the door." }
+    };
+
+    constexpr localized_text memory_texts[] = {
+        { "No estaba lejos.", "It was not far." },
+        { "La voz no grita.", "The voice is not loud." },
+        { "La regla no encierra.", "The rule does not cage." },
+        { "Callar tambien anda.", "Silence also walks." },
+        { "La luz basta cerca.", "Near light is enough." },
+        { "El deseo se limpia.", "Desire is cleansed." },
+        { "Era hondo.", "It was deep." }
     };
 
     const bn::sprite_item& tile_item(tile_kind kind)
@@ -316,6 +477,7 @@ namespace
         bn::vector<bn::sprite_ptr, 1> _boss_sprites;
         bn::vector<bn::sprite_ptr, 128> _text_sprites;
 
+        language _language = language::spanish;
         uint32_t _rng = 0x51A7E5ED;
         int _pilgrim_index = 0;
         int _morada = 1;
@@ -344,11 +506,27 @@ namespace
         bool _hope_used = false;
         bool _paused = false;
         bool _last_action_silence = false;
-        const char* _message = "Busca el umbral.";
+        const char* _message = text_table[int(text_id::seek_threshold)].es;
 
         pilgrim_kind pilgrim() const
         {
             return pilgrim_kind(_pilgrim_index);
+        }
+
+        const char* localize(const localized_text& value) const
+        {
+            return _language == language::spanish ? value.es : value.en;
+        }
+
+        const char* text(text_id id) const
+        {
+            return localize(text_table[int(id)]);
+        }
+
+        void toggle_language()
+        {
+            _language = _language == language::spanish ? language::english : language::spanish;
+            bn::sound_items::pickup.play(0.65);
         }
 
         int current_max_fervor() const
@@ -429,16 +607,21 @@ namespace
             _text_sprites.clear();
             _text_generator.set_center_alignment();
             _text_generator.generate(0, -64, "GBA BACK HOME", _text_sprites);
-            _text_generator.generate(0, -46, "Regreso a la casa", _text_sprites);
-            _text_generator.generate(0, -18, "Roguelike interior", _text_sprites);
-            _text_generator.generate(0, 8, "A: peregrinar", _text_sprites);
-            _text_generator.generate(0, 24, "B: semilla paz", _text_sprites);
-            _text_generator.generate(0, 52, "START: nuevo nombre", _text_sprites);
+            _text_generator.generate(0, -46, text(text_id::title_subtitle), _text_sprites);
+            _text_generator.generate(0, -18, text(text_id::title_genre), _text_sprites);
+            _text_generator.generate(0, 8, text(text_id::title_start), _text_sprites);
+            _text_generator.generate(0, 24, text(text_id::title_peace_seed), _text_sprites);
+            _text_generator.generate(0, 52, text(text_id::title_language), _text_sprites);
         }
 
         void update_title()
         {
-            if(bn::keypad::a_pressed() || bn::keypad::start_pressed())
+            if(bn::keypad::select_pressed())
+            {
+                toggle_language();
+                draw_title();
+            }
+            else if(bn::keypad::a_pressed() || bn::keypad::start_pressed())
             {
                 bn::sound_items::pickup.play(0.8);
                 set_mode(mode::pilgrim);
@@ -455,12 +638,12 @@ namespace
         {
             _text_sprites.clear();
             _text_generator.set_center_alignment();
-            _text_generator.generate(0, -66, "NOMBRE DEL PEREGRINO", _text_sprites);
-            _text_generator.generate(0, -40, pilgrim_names[_pilgrim_index], _text_sprites);
-            _text_generator.generate(0, -18, pilgrim_rules[_pilgrim_index], _text_sprites);
-            _text_generator.generate(0, 20, "LEFT/RIGHT cambia", _text_sprites);
-            _text_generator.generate(0, 36, "A confirma", _text_sprites);
-            _text_generator.generate(0, 56, "Cada nombre cambia la run", _text_sprites);
+            _text_generator.generate(0, -66, text(text_id::pilgrim_title), _text_sprites);
+            _text_generator.generate(0, -40, localize(pilgrim_names[_pilgrim_index]), _text_sprites);
+            _text_generator.generate(0, -18, localize(pilgrim_rules[_pilgrim_index]), _text_sprites);
+            _text_generator.generate(0, 20, text(text_id::pilgrim_change), _text_sprites);
+            _text_generator.generate(0, 36, text(text_id::pilgrim_confirm), _text_sprites);
+            _text_generator.generate(0, 56, text(text_id::title_language), _text_sprites);
         }
 
         void update_pilgrim()
@@ -485,6 +668,11 @@ namespace
             else if(bn::keypad::b_pressed())
             {
                 set_mode(mode::title);
+            }
+            else if(bn::keypad::select_pressed())
+            {
+                toggle_language();
+                draw_pilgrim();
             }
         }
 
@@ -511,13 +699,13 @@ namespace
         {
             _text_sprites.clear();
             _text_generator.set_center_alignment();
-            _text_generator.generate(0, -68, "CASTILLO INTERIOR", _text_sprites);
-            _text_generator.generate(0, -46, pilgrim_names[_pilgrim_index], _text_sprites);
-            _text_generator.generate(0, -22, dwelling_lore[_morada - 1], _text_sprites);
-            _text_generator.generate(0, -4, dwelling_rules[_morada - 1], _text_sprites);
-            _text_generator.generate(0, 28, "A: entrar", _text_sprites);
-            _text_generator.generate(0, 44, "B: titulo", _text_sprites);
-            _text_generator.generate(0, 60, "R: callar / L: memoria", _text_sprites);
+            _text_generator.generate(0, -68, text(text_id::lore_title), _text_sprites);
+            _text_generator.generate(0, -46, localize(pilgrim_names[_pilgrim_index]), _text_sprites);
+            _text_generator.generate(0, -22, localize(dwelling_lore[_morada - 1]), _text_sprites);
+            _text_generator.generate(0, -4, localize(dwelling_rules[_morada - 1]), _text_sprites);
+            _text_generator.generate(0, 28, text(text_id::action_enter), _text_sprites);
+            _text_generator.generate(0, 44, text(text_id::action_title), _text_sprites);
+            _text_generator.generate(0, 60, text(text_id::lore_controls), _text_sprites);
         }
 
         void update_lore()
@@ -530,6 +718,11 @@ namespace
             else if(bn::keypad::b_pressed())
             {
                 set_mode(mode::title);
+            }
+            else if(bn::keypad::select_pressed())
+            {
+                toggle_language();
+                draw_lore();
             }
         }
 
@@ -1078,11 +1271,11 @@ namespace
 
         void enter_dungeon_morada()
         {
-            _message = dwelling_lore[_morada - 1];
+            _message = localize(dwelling_lore[_morada - 1]);
             _message_timer = 120;
             generate_dungeon();
             create_dungeon_sprites();
-            BN_LOG("morada ", _morada, " seed ", int(_rng));
+            BN_LOG("dwelling ", _morada, " seed ", int(_rng));
         }
 
         void create_dungeon_sprites()
@@ -1247,11 +1440,11 @@ namespace
             first_line += bn::to_string<4>(_fervor);
             first_line += "/";
             first_line += bn::to_string<4>(current_max_fervor());
-            first_line += " M";
+            first_line += text(text_id::hud_dwelling_label);
             first_line += roman_morada[_morada - 1];
             if(_has_key)
             {
-                first_line += " LL";
+                first_line += text(text_id::hud_key_marker);
             }
             _text_generator.generate(-116, -76, first_line, _text_sprites);
 
@@ -1259,7 +1452,7 @@ namespace
             bn::string<32> second_line;
             second_line += "MEM";
             second_line += bn::to_string<4>(_memory_count);
-            second_line += " P";
+            second_line += text(text_id::hud_mercy_label);
             second_line += bn::to_string<4>(_mercy_count);
             _text_generator.generate(116, -76, second_line, _text_sprites);
 
@@ -1330,18 +1523,18 @@ namespace
             }
             else if(bn::keypad::select_pressed())
             {
-                set_message("D andar A golpe B luz", 130);
+                set_message(text(text_id::help_controls), 130);
             }
             else if(bn::keypad::start_pressed())
             {
                 _paused = true;
-                set_message("PAUSA A seguir B titulo", 600);
+                set_message(text(text_id::pause), 600);
             }
 
 #ifdef GBH_DEBUG
             if(bn::keypad::start_pressed() && bn::keypad::l_held() && bn::keypad::r_held())
             {
-                set_message("La morada se rehace.", 80);
+                set_message(text(text_id::dungeon_regenerated), 80);
                 generate_dungeon();
                 refresh_all();
                 acted = false;
@@ -1364,7 +1557,7 @@ namespace
             if(bn::keypad::a_pressed() || bn::keypad::start_pressed())
             {
                 _paused = false;
-                set_message("Regresa al camino.", 60);
+                set_message(text(text_id::resume_path), 60);
             }
             else if(bn::keypad::b_pressed())
             {
@@ -1423,20 +1616,20 @@ namespace
             }
             if(next_tile == tile_kind::door_silence)
             {
-                set_message("R frente al umbral.", 70);
+                set_message(text(text_id::silence_threshold_hint), 70);
                 bn::sound_items::door.play(0.45);
                 return true;
             }
             if(! is_walkable(next_x, next_y))
             {
                 bn::sound_items::hit.play(0.45);
-                set_message("La piedra ensena.", 50);
+                set_message(text(text_id::wall_teaches), 50);
                 return true;
             }
             if(next_tile == tile_kind::exit && ! _has_key)
             {
                 bn::sound_items::door.play(0.5);
-                set_message("Falta la llave interior.", 80);
+                set_message(text(text_id::missing_key), 80);
                 return true;
             }
 
@@ -1447,12 +1640,12 @@ namespace
 
             if(next_tile == tile_kind::shrine)
             {
-                set_message("R: orar tres turnos.", 90);
+                set_message(text(text_id::shrine_prompt), 90);
                 bn::sound_items::prayer.play(0.6);
             }
             else if(next_tile == tile_kind::silence)
             {
-                set_message("Aqui pesa el silencio.", 80);
+                set_message(text(text_id::silence_heavy), 80);
             }
             else if(next_tile == tile_kind::exit)
             {
@@ -1481,7 +1674,7 @@ namespace
                 {
                     _hp = max_hp;
                 }
-                set_message("Pan para el camino.", 75);
+                set_message(text(text_id::bread), 75);
                 break;
             case item_kind::candle:
                 _fervor += 2;
@@ -1489,11 +1682,11 @@ namespace
                 {
                     _fervor = current_max_fervor();
                 }
-                set_message("Luz recibida.", 75);
+                set_message(text(text_id::candle), 75);
                 break;
             case item_kind::key:
                 _has_key = true;
-                set_message("Llave interior.", 90);
+                set_message(text(text_id::inner_key), 90);
                 break;
             case item_kind::memory:
                 remember(current_item.memory_index);
@@ -1512,7 +1705,7 @@ namespace
                 ++_memory_count;
             }
             _last_memory = memory_index;
-            set_message(memory_texts[memory_index], 110);
+            set_message(localize(memory_texts[memory_index]), 110);
         }
 
         bool basic_attack()
@@ -1528,7 +1721,7 @@ namespace
             if(enemy_index >= 0)
             {
                 damage_enemy(enemy_index, 1, false);
-                set_message("Resolucion.", 55);
+                set_message(text(text_id::resolution), 55);
                 return true;
             }
 
@@ -1539,7 +1732,7 @@ namespace
                 return true;
             }
 
-            set_message("El golpe no discierne.", 45);
+            set_message(text(text_id::strike_no_discern), 45);
             return true;
         }
 
@@ -1549,7 +1742,7 @@ namespace
             _silence_chain = 0;
             if(_fervor < 2)
             {
-                set_message("Falta luz.", 60);
+                set_message(text(text_id::no_light), 60);
                 bn::sound_items::hit.play(0.45);
                 return false;
             }
@@ -1592,7 +1785,7 @@ namespace
 
             if(effects > 0)
             {
-                set_message(pilgrim() == pilgrim_kind::charity ? "Misericordia y luz." : "La luz discierne.", 85);
+                set_message(pilgrim() == pilgrim_kind::charity ? text(text_id::mercy_light) : text(text_id::light_discerns), 85);
             }
             else
             {
@@ -1612,7 +1805,7 @@ namespace
             if(tile_at(tx, ty) == tile_kind::door_silence)
             {
                 open_silence_door(tx, ty);
-                set_message("El umbral cede.", 90);
+                set_message(text(text_id::threshold_yields), 90);
                 bn::sound_items::door.play(0.75);
                 return true;
             }
@@ -1628,12 +1821,12 @@ namespace
                     _fervor = current_max_fervor();
                     _map[_player_y][_player_x] = tile_kind::shrine_spent;
                     _shrine_prayer = 0;
-                    set_message("Silencio restaurado.", 110);
+                    set_message(text(text_id::shrine_restored), 110);
                     bn::sound_items::prayer.play(0.9);
                 }
                 else
                 {
-                    set_message("Permanece.", 70);
+                    set_message(text(text_id::remain), 70);
                     bn::sound_items::prayer.play(0.55);
                 }
                 return true;
@@ -1651,7 +1844,7 @@ namespace
                 }
                 else
                 {
-                    set_message("Callar da luz.", 70);
+                    set_message(text(text_id::silence_light), 70);
                 }
             }
             else if(safe)
@@ -1660,7 +1853,7 @@ namespace
             }
             else
             {
-                set_message("Hay ruido cerca.", 60);
+                set_message(text(text_id::noise_near), 60);
             }
 
             return true;
@@ -1680,15 +1873,15 @@ namespace
             int dy = target_y - _player_y;
             if(abs_int(dx) > abs_int(dy))
             {
-                set_message(dx > 0 ? "La llamada va al ESTE." : "La llamada va al OESTE.", 80);
+                set_message(dx > 0 ? text(text_id::call_east) : text(text_id::call_west), 80);
             }
             else if(dy != 0)
             {
-                set_message(dy > 0 ? "La llamada va al SUR." : "La llamada va al NORTE.", 80);
+                set_message(dy > 0 ? text(text_id::call_south) : text(text_id::call_north), 80);
             }
             else
             {
-                set_message("La llamada esta aqui.", 80);
+                set_message(text(text_id::call_here), 80);
             }
         }
 
@@ -1696,11 +1889,11 @@ namespace
         {
             if(_last_memory >= 0)
             {
-                set_message(memory_texts[_last_memory], 130);
+                set_message(localize(memory_texts[_last_memory]), 130);
             }
             else if(_memory_count == 0)
             {
-                set_message("Aun no hay memoria.", 90);
+                set_message(text(text_id::no_memory), 90);
             }
             else
             {
@@ -1709,7 +1902,7 @@ namespace
                     if((_memories_mask & (1 << index)) != 0)
                     {
                         _last_memory = index;
-                        set_message(memory_texts[index], 130);
+                        set_message(localize(memory_texts[index]), 130);
                         return;
                     }
                 }
@@ -1759,7 +1952,7 @@ namespace
         void false_door_trap(int x, int y)
         {
             _map[y][x] = tile_kind::wall;
-            damage_player(1, "La puerta falsa hiere.");
+            damage_player(1, text(text_id::false_door_hurts));
             int slot = first_free_enemy_slot();
             if(slot >= 0)
             {
@@ -1809,7 +2002,7 @@ namespace
             {
                 _hope_used = true;
                 _hp = 1;
-                set_message("Esperanza levanta.", 100);
+                set_message(text(text_id::hope_rises), 100);
                 bn::sound_items::prayer.play(0.9);
                 return;
             }
@@ -1833,7 +2026,7 @@ namespace
                 if(distance == 1)
                 {
                     int damage = current_enemy.kind == enemy_kind::beast ? 2 : 1;
-                    damage_player(damage, current_enemy.kind == enemy_kind::beast ? "La bestia golpea." : "La sombra hiere.");
+                    damage_player(damage, current_enemy.kind == enemy_kind::beast ? text(text_id::beast_hits) : text(text_id::shadow_hurts));
                     bn::sound_items::hit.play(0.65);
                     continue;
                 }
@@ -1841,7 +2034,7 @@ namespace
                 if(current_enemy.kind == enemy_kind::noise && distance <= 3 && _fervor > 0 && (current_enemy.step_counter % 2) == 0)
                 {
                     --_fervor;
-                    set_message("El ruido apaga luz.", 55);
+                    set_message(text(text_id::noise_drains), 55);
                     continue;
                 }
 
@@ -1966,7 +2159,7 @@ namespace
         {
             _boss_marks = 0;
             _boss_turn = 0;
-            _message = "No toda puerta es casa.";
+            _message = text(text_id::boss_intro);
             _message_timer = 160;
             _boss_sprites.push_back(bn::sprite_items::boss_false_door.create_sprite(0, -18));
             _boss_sprites[0].set_z_order(-20);
@@ -1983,19 +2176,21 @@ namespace
         {
             _text_sprites.clear();
             _text_generator.set_center_alignment();
-            _text_generator.generate(0, -74, "LA PUERTA FALSA", _text_sprites);
+            _text_generator.generate(0, -74, text(text_id::boss_title), _text_sprites);
 
             bn::string<48> status;
             status += "HP";
             status += bn::to_string<4>(_hp);
             status += " L";
             status += bn::to_string<4>(_fervor);
-            status += " SELLOS";
+            status += text(text_id::boss_seals_label);
             status += bn::to_string<4>(_boss_marks);
             _text_generator.generate(0, 18, status, _text_sprites);
 
-            _text_generator.generate(0, 38, boss_silence_window() ? "VENTANA DE SILENCIO" : "RUIDO: no ataques", _text_sprites);
-            _text_generator.generate(0, 54, "R calla  B ora  A hiere", _text_sprites);
+            _text_generator.generate(0, 38,
+                                     boss_silence_window() ? text(text_id::boss_silence_window) : text(text_id::boss_noise_window),
+                                     _text_sprites);
+            _text_generator.generate(0, 54, text(text_id::boss_controls), _text_sprites);
             if(_message_timer > 0)
             {
                 _text_generator.generate(0, 70, _message, _text_sprites);
@@ -2010,12 +2205,12 @@ namespace
                 if(boss_silence_window())
                 {
                     ++_boss_marks;
-                    set_message("Silencio verdadero.", 90);
+                    set_message(text(text_id::true_silence), 90);
                     bn::sound_items::prayer.play(0.85);
                 }
                 else
                 {
-                    set_message("Aun hay ruido.", 70);
+                    set_message(text(text_id::still_noise), 70);
                 }
                 acted = true;
             }
@@ -2023,7 +2218,7 @@ namespace
             {
                 if(_fervor < 2)
                 {
-                    set_message("Falta luz.", 60);
+                    set_message(text(text_id::no_light), 60);
                 }
                 else
                 {
@@ -2031,19 +2226,19 @@ namespace
                     if(boss_silence_window())
                     {
                         ++_boss_marks;
-                        set_message("La puerta se vacia.", 90);
+                        set_message(text(text_id::door_empties), 90);
                         bn::sound_items::prayer.play(0.9);
                     }
                     else
                     {
-                        damage_player(1, "Orar sin oir duele.");
+                        damage_player(1, text(text_id::prayer_hurts));
                     }
                 }
                 acted = true;
             }
             else if(bn::keypad::a_pressed())
             {
-                damage_player(1, "Golpear la alimenta.");
+                damage_player(1, text(text_id::hit_feeds));
                 acted = true;
             }
             else if(bn::keypad::l_pressed())
@@ -2061,7 +2256,7 @@ namespace
                 ++_boss_turn;
                 if(! boss_silence_window() && (_boss_turn % 3) == 0)
                 {
-                    damage_player(1, "El ruido muerde.");
+                    damage_player(1, text(text_id::noise_bites));
                 }
                 if(_boss_marks >= 3)
                 {
@@ -2079,11 +2274,11 @@ namespace
         {
             if(_memory_count >= 4)
             {
-                set_message("Las memorias reconocen.", 100);
+                set_message(text(text_id::boss_memory_good), 100);
             }
             else
             {
-                set_message("Pocas memorias alumbran.", 100);
+                set_message(text(text_id::boss_memory_low), 100);
             }
         }
 
@@ -2091,20 +2286,20 @@ namespace
         {
             _text_sprites.clear();
             _text_generator.set_center_alignment();
-            _text_generator.generate(0, -64, "HAS VUELTO A CASA", _text_sprites);
-            _text_generator.generate(0, -34, "No estaba lejos.", _text_sprites);
-            _text_generator.generate(0, -18, "Era hondo.", _text_sprites);
+            _text_generator.generate(0, -64, text(text_id::victory_title), _text_sprites);
+            _text_generator.generate(0, -34, localize(memory_texts[0]), _text_sprites);
+            _text_generator.generate(0, -18, localize(memory_texts[6]), _text_sprites);
 
             bn::string<48> line;
             line += "MEM";
             line += bn::to_string<4>(_memory_count);
-            line += " PAZ";
+            line += text(text_id::hud_mercy_label);
             line += bn::to_string<4>(_mercy_count);
             line += " T";
             line += bn::to_string<8>(_turns);
             _text_generator.generate(0, 14, line, _text_sprites);
-            _text_generator.generate(0, 42, "A: otra peregrinacion", _text_sprites);
-            _text_generator.generate(0, 58, "B: titulo", _text_sprites);
+            _text_generator.generate(0, 42, text(text_id::victory_restart), _text_sprites);
+            _text_generator.generate(0, 58, text(text_id::action_title), _text_sprites);
             BN_LOG("victory turns ", _turns, " memories ", _memory_count, " mercy ", _mercy_count);
         }
 
@@ -2119,31 +2314,36 @@ namespace
             {
                 set_mode(mode::title);
             }
+            else if(bn::keypad::select_pressed())
+            {
+                toggle_language();
+                draw_victory();
+            }
         }
 
         void draw_defeat()
         {
             _text_sprites.clear();
             _text_generator.set_center_alignment();
-            _text_generator.generate(0, -58, "NOCHE INTERIOR", _text_sprites);
-            _text_generator.generate(0, -28, "Caer no es perderse.", _text_sprites);
+            _text_generator.generate(0, -58, text(text_id::defeat_title), _text_sprites);
+            _text_generator.generate(0, -28, text(text_id::defeat_fall), _text_sprites);
             _text_generator.generate(0, -12, defeat_hint(), _text_sprites);
-            _text_generator.generate(0, 22, "A: repetir morada", _text_sprites);
-            _text_generator.generate(0, 42, "B: titulo", _text_sprites);
-            BN_LOG("defeat morada ", _morada, " turns ", _turns);
+            _text_generator.generate(0, 22, text(text_id::defeat_retry), _text_sprites);
+            _text_generator.generate(0, 42, text(text_id::action_title), _text_sprites);
+            BN_LOG("defeat dwelling ", _morada, " turns ", _turns);
         }
 
         const char* defeat_hint() const
         {
             if(_fervor <= 0)
             {
-                return "La fuente no se fuerza.";
+                return text(text_id::defeat_hint_no_light);
             }
             if(_morada >= 5)
             {
-                return "La prisa apago la lampara.";
+                return text(text_id::defeat_hint_haste);
             }
-            return "Nombrar la sombra ayuda.";
+            return text(text_id::defeat_hint_shadow);
         }
 
         void update_defeat()
@@ -2162,6 +2362,11 @@ namespace
             else if(bn::keypad::b_pressed())
             {
                 set_mode(mode::title);
+            }
+            else if(bn::keypad::select_pressed())
+            {
+                toggle_language();
+                draw_defeat();
             }
         }
     };

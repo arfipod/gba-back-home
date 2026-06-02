@@ -5,17 +5,17 @@ This file summarizes the requested design pass implemented in this package.
 ## Core Identity
 
 - Shifted the game from a generic procedural crawler starter into a spiritual micro-roguelike about returning home.
-- Standardized language around morada, umbral, luz, memoria, silencio and peregrino.
+- Standardized language around dwelling, threshold, light, memory, silence, and pilgrim.
 - Moved the design away from conquest and toward discernment.
 
 ## Player Profiles
 
 Implemented four pilgrim identities:
 
-- **FE**: larger light pool and longer prayer range.
-- **ESPERANZA**: one automatic recovery from death per run.
-- **CARIDAD**: prayer pacifies non-beast enemies.
-- **PAZ**: lower enemy detection range and extra starting light.
+- **Faith**: larger light pool and longer prayer range.
+- **Hope**: one automatic recovery from death per run.
+- **Charity**: prayer pacifies non-beast enemies.
+- **Peace**: lower enemy detection range and extra starting light.
 
 ## Dungeon Loop
 
@@ -25,15 +25,15 @@ Implemented four pilgrim identities:
 - Added memories and optional branch rewards.
 - Added explicit key-to-exit loop.
 
-## Morada Rules
+## Dwelling Rules
 
-- Morada I: safer introduction.
-- Morada II: silence gives directional calling.
-- Morada III: tighter resource pressure.
-- Morada IV: silence recovers light when safe.
-- Morada V: more false doors and haste enemies.
-- Morada VI: beast guardians.
-- Morada VII: final boss transition.
+- Dwelling I: safer introduction.
+- Dwelling II: silence gives directional calling.
+- Dwelling III: tighter resource pressure.
+- Dwelling IV: silence recovers light when safe.
+- Dwelling V: more false doors and haste enemies.
+- Dwelling VI: beast guardians.
+- Dwelling VII: final boss transition.
 
 ## Combat
 
@@ -68,11 +68,11 @@ Implemented four pilgrim identities:
 - Relics are now memories.
 - Memory lines are short and reusable.
 - Defeat now gives a cause-flavored line.
-- Victory completes the recurring phrase: "No estaba lejos. Era hondo."
+- Victory completes the recurring phrase: "It was not far. It was deep."
 
 ## Boss
 
-- Added **La Puerta Falsa**.
+- Added **The False Door**.
 - It alternates noise and silence windows.
 - Attacking feeds/hurts the player.
 - Silence/prayer during the right window advances victory.

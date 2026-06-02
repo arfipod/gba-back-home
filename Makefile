@@ -5,10 +5,17 @@ TARGET       :=  gba-back-home
 BUILD        :=  build
 LIBBUTANO    ?=  vendor/butano/butano
 PYTHON       ?=  python3
+
+ifndef LIBBUTANOABS
+    export LIBBUTANOABS := $(realpath $(LIBBUTANO))
+endif
+
+BUTANO_COMMON := $(shell realpath --relative-to="$(CURDIR)" "$(LIBBUTANOABS)/../common")
+
 SOURCES      :=  src
-INCLUDES     :=  include $(LIBBUTANO)/../common/include
+INCLUDES     :=  include $(BUTANO_COMMON)/include
 DATA         :=
-GRAPHICS     :=  graphics $(LIBBUTANO)/../common/graphics
+GRAPHICS     :=  graphics $(BUTANO_COMMON)/graphics
 AUDIO        :=  audio
 AUDIOBACKEND :=  maxmod
 AUDIOTOOL    :=
@@ -26,9 +33,5 @@ DEFAULTLIBS  :=
 STACKTRACE   :=
 USERBUILD    :=
 EXTTOOL      :=
-
-ifndef LIBBUTANOABS
-    export LIBBUTANOABS := $(realpath $(LIBBUTANO))
-endif
 
 include $(LIBBUTANOABS)/butano.mak

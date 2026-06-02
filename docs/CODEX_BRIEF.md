@@ -40,13 +40,13 @@ Make the project compile cleanly in Docker, run it in mGBA, and playtest the who
 
 ## Design Priority Order
 
-1. Polish Morada I as a perfect 3-5 minute vertical slice.
-2. Give each morada stronger room grammar, not just parameter changes.
-3. Make silence/espera feel valuable and risky.
+1. Polish dwelling I as a perfect 3-5 minute vertical slice.
+2. Give each dwelling stronger room grammar, not just parameter changes.
+3. Make silence/waiting feel valuable and risky.
 4. Improve false door telegraphing so it is fair, not random-feeling.
 5. Convert memories into a reliquary screen.
 6. Add final-boss readability: clear noise/silence cycle.
-7. Add pacification feedback for CARIDAD.
+7. Add pacification feedback for Charity.
 8. Balance shrines so they feel like a commitment, not a free refill.
 
 ## Known Fragile Points

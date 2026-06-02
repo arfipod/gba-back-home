@@ -14,5 +14,15 @@ test -f "${LIBBUTANO}/butano.mak" || { echo "ERROR: butano.mak not found. Run sc
 command -v arm-none-eabi-g++ >/dev/null && arm-none-eabi-g++ --version | head -n 1
 command -v make >/dev/null && make --version | head -n 1
 command -v python >/dev/null && python --version
-(command -v mgba-qt >/dev/null && echo "mGBA Qt: $(command -v mgba-qt)") || echo "mGBA Qt not found"
+if command -v mgba-qt >/dev/null; then
+    echo "mGBA Qt: $(command -v mgba-qt)"
+elif [[ -x /usr/games/mgba-qt ]]; then
+    echo "mGBA Qt: /usr/games/mgba-qt"
+elif command -v mgba >/dev/null; then
+    echo "mGBA: $(command -v mgba)"
+elif [[ -x /usr/games/mgba ]]; then
+    echo "mGBA: /usr/games/mgba"
+else
+    echo "mGBA not found"
+fi
 echo "OK"

@@ -2,195 +2,197 @@
 
 ## Vision
 
-El juego no trata de conquistar un castillo, sino de **volver**. La arquitectura no es exterior: cada mapa representa una morada interior. El jugador avanza, calla, discierne, recuerda y atraviesa. Matar enemigos puede ser util, pero no debe ser siempre el camino optimo.
+The game is not about conquering a castle, but about **returning**. Its architecture is inward: each map represents an interior dwelling. The player advances, keeps silence, discerns, remembers, and crosses thresholds. Killing enemies can be useful, but it should not always be the optimal path.
 
-## Pilares
+## Pillars
 
-1. **Volver, no conquistar**: la meta es reconocer el umbral verdadero.
-2. **La luz es recurso, informacion y combate**: la luz/fervor sirve para orar, pacificar y discernir.
-3. **Cada morada cambia una regla**: no solo suben los numeros.
-4. **La mazmorra debe tener intencion**: proceduralidad con salas, ramas, llave, santuario, memorias y salida.
-5. **La derrota ensena**: caer no es estar perdido.
+1. **Return, do not conquer**: the goal is to recognize the true threshold.
+2. **Light is resource, information, and combat**: light/fervor powers prayer, pacification, and discernment.
+3. **Each dwelling changes a rule**: difficulty should not come only from bigger numbers.
+4. **The dungeon must have intention**: procedural generation includes rooms, branches, key, shrine, memories, and exit.
+5. **Defeat teaches**: falling does not mean being lost.
 
-## Estructura de run
+## Run Structure
 
-1. Seleccion de peregrino.
-2. Pantalla de lore/regla de morada.
-3. Dungeon procedural con objetivo de llave + umbral.
-4. Memoria opcional.
-5. Transicion a siguiente morada.
-6. En la morada VII, boss **La Puerta Falsa**.
-7. Victoria: regresar a casa.
+1. Select a pilgrim.
+2. Read the dwelling lore/rule screen.
+3. Explore a procedural dungeon with a key-and-threshold objective.
+4. Collect an optional memory.
+5. Transition to the next dwelling.
+6. In dwelling VII, face **The False Door**.
+7. Win by returning home.
 
-## Peregrinos
+## Pilgrims
 
-- **FE**: aumenta la luz maxima y el alcance de oracion.
-- **ESPERANZA**: una vez por run, al caer, vuelve a 1 HP.
-- **CARIDAD**: la oracion pacifica enemigos no-bestia y suma contador de paz.
-- **PAZ**: reduce el rango de deteccion enemigo y empieza con mas luz.
+- **Faith**: increases maximum light and prayer range.
+- **Hope**: once per run, falling restores the player to 1 HP.
+- **Charity**: prayer pacifies non-beast enemies and increases the mercy counter.
+- **Peace**: reduces enemy detection range and starts with more light.
 
-## Moradas
+## Dwellings
 
-### I. Conocimiento propio
+### I. Self-Knowledge
 
-- Introduce movimiento, golpe, luz, llave y umbral.
-- Enemigos principales: Duda.
-- Regla emocional: los muros ensenan limite.
+- Introduces movement, strike, light, key, and threshold.
+- Main enemy: Doubt.
+- Emotional rule: walls teach limits.
 
-### II. Llamada
+### II. Calling
 
-- `R` da una senal hacia llave o salida.
-- Mapas con mas corredores.
-- Enemigo sugerido: Ruido, que apaga luz cercana.
+- `R` gives a signal toward the key or exit.
+- Maps lean toward more corridors.
+- Suggested enemy pressure: Noise, which dims nearby light.
 
-### III. Disciplina
+### III. Discipline
 
-- Menos recursos.
-- Sombras mas frecuentes.
-- La mala economia de luz castiga.
+- Fewer resources.
+- Shadows become more common.
+- Poor light economy is punished.
 
-### IV. Quietud
+### IV. Stillness
 
-- `R` en seguridad recupera luz.
-- Tiles de silencio y puertas de silencio aparecen con mas frecuencia.
-- Esperar se vuelve una accion positiva.
+- `R` restores light when the player is safe.
+- Silence tiles and silence doors appear more often.
+- Waiting becomes a positive action.
 
-### V. Confianza
+### V. Trust
 
-- Mas puertas falsas.
-- Enemigos de prisa que castigan moverse sin callar.
-- El jugador aprende a discernir antes de golpear.
+- More false doors.
+- Haste enemies punish movement without silence.
+- The player learns to discern before striking.
 
-### VI. Purificacion
+### VI. Purification
 
-- Bestias guardianas cerca de umbrales.
-- Danio mas alto, pero telegráfico por rol: la bestia es lenta.
-- El santuario se vuelve una decision de riesgo.
+- Beast guardians near thresholds.
+- Higher damage, but telegraphed by role: beasts are slow.
+- The shrine becomes a risk decision.
 
-### VII. Hogar
+### VII. Home
 
-- El umbral lleva a **La Puerta Falsa**.
-- El boss se supera con silencio/oracion durante ventanas correctas, no golpeando.
+- The threshold leads to **The False Door**.
+- The boss is overcome with silence/prayer during correct windows, not by striking.
 
-## Combate
+## Combat
 
-### Golpe basico: Resolucion
+### Basic Strike: Resolve
 
-- Boton: `A`.
-- Golpea una casilla en la ultima direccion.
-- Si el jugador intenta moverse hacia un enemigo, tambien golpea.
-- Sirve contra Duda, Sombra y Prisa.
-- No discierne puertas falsas.
+- Button: `A`.
+- Hits one tile in the last faced direction.
+- Moving into an enemy also attacks it.
+- Works against Doubt, Shadow, and Haste.
+- Does not discern false doors.
 
-### Oracion
+### Prayer
 
-- Boton: `B`.
-- Consume 2 de luz.
-- Afecta enemigos a rango Manhattan 2; FE aumenta a 3.
-- Con CARIDAD, pacifica enemigos no-bestia.
-- Tambien revela/desactiva puertas falsas y abre puertas de silencio cercanas.
+- Button: `B`.
+- Costs 2 light.
+- Affects enemies in Manhattan range 2; Faith increases this to 3.
+- With Charity, pacifies non-beast enemies.
+- Also reveals/disables false doors and opens nearby silence doors.
 
-### Silencio
+### Silence
 
-- Boton: `R`.
-- Consume un turno.
-- Abre puertas de silencio al estar orientado hacia ellas.
-- En santuario, requiere tres turnos para restaurar HP/luz; el santuario se agota.
-- En morada IV o tiles de silencio, si no hay enemigo adyacente, recupera luz.
-- En moradas de llamada/confianza, da senal hacia llave o salida.
+- Button: `R`.
+- Consumes one turn.
+- Opens silence doors when facing them.
+- At shrines, requires three turns to restore HP/light; the shrine is then spent.
+- In dwelling IV or on silence tiles, restores light if no enemy is adjacent.
+- In calling/trust dwellings, gives a signal toward the key or exit.
 
-## Enemigos
+## Enemies
 
-### Duda
+### Doubt
 
-- Lenta, directa, 1 HP.
-- Ensena posicionamiento basico.
+- Slow, direct, 1 HP.
+- Teaches basic positioning.
 
-### Sombra
+### Shadow
 
-- Rapida, 2 HP.
-- Evita santuarios.
-- Castiga pasillos estrechos.
+- Fast, 2 HP.
+- Avoids shrines.
+- Punishes narrow corridors.
 
-### Ruido
+### Noise
 
-- Erratica.
-- Si esta cerca, apaga luz.
-- La oracion/pacificacion es su contrajuego natural.
+- Erratic.
+- Dims light when nearby.
+- Prayer/pacification is its natural counterplay.
 
-### Prisa
+### Haste
 
-- Rapida si el jugador no ha usado silencio.
-- Se ralentiza cuando el jugador espera/calla.
-- Ensenanza: no todo se resuelve corriendo.
+- Fast if the player has not used silence.
+- Slows down when the player waits.
+- Lesson: not everything is solved by rushing.
 
-### Bestia
+### Beast
 
-- Lenta, 3 HP, 2 de dano.
-- Puede actuar como guardiana de salida.
-- El contrajuego es posicionamiento, luz y paciencia.
+- Slow, 3 HP, 2 damage.
+- Can act as an exit guardian.
+- Counterplay is positioning, light, and patience.
 
-## Puertas
+## Doors
 
-- **Umbral final**: requiere llave interior.
-- **Puerta falsa**: parece salida/atajo, pero dana y puede invocar sombra/ruido. La oracion la discierne.
-- **Puerta de silencio**: se abre con `R` orientado hacia ella o con oracion cercana. Suele esconder un pequeno recurso.
-- **Puerta abierta**: paso normal.
+- **Final threshold**: requires the inner key.
+- **False door**: looks like an exit or shortcut, but hurts the player and can summon shadow/noise. Prayer discerns it.
+- **Silence door**: opens with `R` while facing it or with nearby prayer. Usually hides a small resource.
+- **Open door**: normal passage.
 
-## Objetos
+## Objects
 
-- **Pan**: cura HP.
-- **Vela**: restaura luz.
-- **Llave interior**: abre el umbral de la morada.
-- **Memoria**: desbloquea una frase persistente durante la run.
-- **Santuario**: restauracion completa tras tres turnos de silencio; se agota al usarse.
+- **Bread**: heals HP.
+- **Candle**: restores light.
+- **Inner key**: opens the dwelling threshold.
+- **Memory**: unlocks a short phrase during the run.
+- **Shrine**: fully restores HP/light after three turns of silence; becomes spent after use.
 
-## Memorias
+## Memories
 
-Las memorias son el corazon narrativo. No son loot de poder; son comprensiones breves.
+Memories are the narrative core. They are not power loot; they are brief understandings.
 
-1. No estaba lejos.
-2. La voz no grita.
-3. La regla no encierra.
-4. Callar tambien anda.
-5. La luz basta cerca.
-6. El deseo se limpia.
-7. Era hondo.
+1. It was not far.
+2. The voice is not loud.
+3. The rule does not cage.
+4. Silence also walks.
+5. Near light is enough.
+6. Desire is cleansed.
+7. It was deep.
 
-## Boss: La Puerta Falsa
+## Boss: The False Door
 
-- Aparece tras la morada VII.
-- Tiene ciclos de ruido y ventanas de silencio.
-- `A` la alimenta y hiere al jugador.
-- `R` durante una ventana de silencio pone un sello.
-- `B` durante una ventana de silencio tambien pone un sello, consumiendo luz.
-- Tres sellos abren el regreso.
+- Appears after dwelling VII.
+- Alternates between noise and silence windows.
+- `A` feeds it and hurts the player.
+- `R` during a silence window adds a seal.
+- `B` during a silence window also adds a seal, consuming light.
+- Three seals open the return.
 
-## Proceduralidad
+## Procedural Generation
 
-El generador actual usa salas y corredores conectados. Luego coloca:
+The current generator uses connected rooms and corridors. It then places:
 
-1. Inicio seguro.
-2. Salida mas lejana por BFS.
-3. Llave en posicion significativa, separada de inicio/salida.
-4. Santuario.
-5. Tiles de silencio.
-6. Memoria opcional.
-7. Recursos.
-8. Puertas falsas y de silencio en paredes adyacentes.
-9. Enemigos segun morada.
-10. Bestia guardiana en moradas altas.
+1. Safe start.
+2. Farthest exit by BFS.
+3. Meaningfully separated key.
+4. Shrine.
+5. Silence tiles.
+6. Optional memory.
+7. Resources.
+8. False doors and silence doors in adjacent walls.
+9. Enemies by dwelling.
+10. Beast guardian in higher dwellings.
 
-Principio: la aleatoriedad debe crear variacion, no injusticia.
+Principle: randomness should create variation, not unfairness.
 
-## Lenguaje
+## Language
 
-El texto debe ser corto, sobrio y no explicativo. Evitar sermonear. Usar vocabulario recurrente: puerta, umbral, morada, silencio, sombra, llave, casa, Padre, pan, luz, noche, gracia, memoria.
+In-game text must stay short, restrained, and non-expository. Avoid sermonizing. Reuse a stable vocabulary: door, threshold, dwelling, silence, shadow, key, house, Father, bread, light, night, grace, memory.
 
-## Proximas decisiones de diseno
+The game ships with Spanish and English text. Documentation remains English.
 
-- Definir si las memorias modifican mecanicas o solo final/lore.
-- Crear room grammar con salas prefabricadas.
-- Introducir mapa abstracto/revelacion limitada.
-- Convertir las puertas en puzzles por morada.
-- Balancear duracion: 2-4 minutos por morada, 20-30 minutos por run completa.
+## Upcoming Design Decisions
+
+- Decide whether memories modify mechanics or remain final/lore context.
+- Create room grammar with authored room fragments.
+- Introduce an abstract map or limited revelation.
+- Turn doors into dwelling-specific puzzles.
+- Balance length: 2-4 minutes per dwelling, 20-30 minutes for a full run.
