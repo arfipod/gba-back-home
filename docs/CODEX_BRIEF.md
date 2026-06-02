@@ -26,17 +26,13 @@ Make the project compile cleanly in Docker, run it in mGBA, and playtest the who
    ```
 3. **Verify OAM budget** in emulator. The map still uses 9x6 sprite tiles, so text lines must remain short.
 4. **Move dungeon map to background/tilemap**. This frees sprites for animation, particles and richer UI.
-5. Split `src/main.cpp` into modules:
-   - `profile.*`
-   - `dungeon_generator.*`
-   - `combat.*`
-   - `entities.*`
-   - `ui.*`
-   - `boss_false_door.*`
-   - `audio_manager.*`
+5. Continue refining module boundaries as features grow:
+   - split enemy AI from player actions if combat expands
+   - split HUD/message rendering from viewport rendering if UI grows
+   - introduce an audio manager once sound rules become stateful
 6. Add SRAM for profile, reliquary and options.
 7. Add sprite animations and hurt/attack telegraphs.
-8. Add automated host-side tests for the exact C++ generator once it is modularized.
+8. Add automated host-side tests for the exact C++ generator.
 
 ## Design Priority Order
 
@@ -51,7 +47,7 @@ Make the project compile cleanly in Docker, run it in mGBA, and playtest the who
 
 ## Known Fragile Points
 
-- `src/main.cpp` is intentionally still monolithic. It is easier to review now, but should be split after the first successful build.
+- `src/main.cpp` is now only the boot loop. Gameplay lives in responsibility-focused `gbh_*` modules.
 - Butano text uses sprites; long text lines can exceed OAM during dungeon scenes.
 - New BMP assets are placeholder art. They are 4bpp indexed with JSON metadata.
 - The procedural smoke test mirrors the generator conceptually, but the C++ source is the game authority.

@@ -32,7 +32,13 @@ USERFLAGS := -DGBH_DEBUG -DBN_CFG_LOG_ENABLED=true -DBN_CFG_LOG_BACKEND=BN_LOG_B
 
 ## Safe Points To Edit
 
-- `src/main.cpp`: gameplay loop, generator, combat, boss, UI.
+- `src/main.cpp`: boot loop only.
+- `src/gbh_game_flow.cpp`: mode transitions, title/profile/lore screens, run setup.
+- `src/gbh_dungeon_generation.cpp`: map generation, placement, entity spawning.
+- `src/gbh_dungeon_render.cpp`: sprite creation, viewport refresh, HUD/messages.
+- `src/gbh_dungeon_actions.cpp`: player actions, combat, silence, items, enemy turns.
+- `src/gbh_boss_and_results.cpp`: boss, victory and defeat screens.
+- `src/gbh_localization.cpp` and `src/gbh_assets.cpp`: text and sprite item lookup.
 - `graphics/*.bmp` and `graphics/*.json`: placeholder art.
 - `audio/*.wav` and `audio/*.mod`: placeholder audio.
 - `docs/DESIGN.md`: lore and design canon.

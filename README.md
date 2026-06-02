@@ -6,7 +6,7 @@ This expanded vertical slice includes Docker, the compiler toolchain, an emulato
 
 ## Contents
 
-- Complete Butano project: `Makefile`, `src/main.cpp`, `graphics/`, `audio/`, `dmg_audio/`.
+- Complete Butano project: `Makefile`, modular `src/` code, `graphics/`, `audio/`, `dmg_audio/`.
 - Docker image with devkitPro/devkitARM, Butano, mGBA, and password-protected noVNC.
 - VS Code/Codex devcontainer.
 - 4bpp BMP sprites plus JSON metadata for Butano.
@@ -116,6 +116,6 @@ It does not replace the Butano build, but it helps catch procedural design regre
 
 1. Playtest 30-50 seeds per dwelling.
 2. Move visible map rendering from sprites to a background/tilemap to free OAM.
-3. Split `src/main.cpp` into modules: `generator`, `combat`, `ui`, `audio`, and `profile`.
+3. Continue extracting smaller systems from `gbh_dungeon_actions.cpp` as combat and AI grow.
 4. Add SRAM for persistent relic/memory records and options.
 5. Create final art and frame-based animations.

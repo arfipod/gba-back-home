@@ -41,7 +41,7 @@ Ask these questions during playtest:
 
 ## Quick Tuning Levers
 
-- `enemy_count = 2 + _morada` in `src/main.cpp`.
+- `enemy_count = 2 + _dwelling` in `src/gbh_dungeon_generation.cpp`.
 - Prayer cost and range in `prayer_action()` / `prayer_range()`.
 - Shrine channel length in `silence_action()`.
 - False door count in `generate_dungeon()`.
