@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     websockify \
     x11vnc \
     xauth \
+    xdotool \
     xvfb \
     && rm -rf /var/lib/apt/lists/*
 

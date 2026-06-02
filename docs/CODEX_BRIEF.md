@@ -12,6 +12,7 @@ Make the project compile cleanly in Docker, run it in mGBA, and playtest the who
 
 - `docker compose run --rm gba-dev scripts/build.sh` generates `gba-back-home.gba`.
 - `scripts/run-rom.sh` opens the ROM in mGBA through noVNC.
+- `docs/EMULATOR_SCREENSHOTS.md` documents the repeatable mGBA/noVNC screenshot and visual-check workflow.
 - The game can reach victory from title without hangs.
 - Visible sprites never exceed the 128 hardware sprite limit.
 - Key and exit are reachable for all tested seeds.

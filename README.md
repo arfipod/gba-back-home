@@ -66,6 +66,8 @@ Documentation is intentionally kept in English.
 
 The following screenshots were captured from the built ROM running in mGBA through the included noVNC environment.
 
+For the repeatable capture workflow, emulator launch flags, key automation, cropping, and troubleshooting, see [Emulator Screenshots And Visual Checks](docs/EMULATOR_SCREENSHOTS.md).
+
 ### Bilingual Title Screen
 
 ![Spanish title screen with the pilgrimage start prompt and language switch](docs/screenshots/title-es.png)
