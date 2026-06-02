@@ -1,0 +1,17 @@
+{
+  "name": "gba-back-home",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "gba-dev",
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
+  "forwardPorts": [6080, 5900],
+  "postCreateCommand": "scripts/doctor.sh || true",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  }
+}

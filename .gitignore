@@ -1,0 +1,20 @@
+# Butano / GBA build outputs
+build/
+*.gba
+*.elf
+*.sav
+*.map
+*.sym
+*.lst
+*.d
+
+# Local Butano clone
+vendor/butano/
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log

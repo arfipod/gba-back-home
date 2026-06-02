@@ -1,0 +1,20 @@
+services:
+  gba-dev:
+    build:
+      context: .
+      args:
+        BUTANO_REF: "21.6.0"
+    image: gba-back-home-dev:latest
+    container_name: gba-back-home-dev
+    working_dir: /workspace
+    environment:
+      LIBBUTANO: /opt/butano/butano
+      DISPLAY: :1
+      ENABLE_VNC: "1"
+      VNC_PASSWORD: ${VNC_PASSWORD:-gba}
+    ports:
+      - "6080:6080"
+      - "5900:5900"
+    volumes:
+      - .:/workspace
+    shm_size: "512m"

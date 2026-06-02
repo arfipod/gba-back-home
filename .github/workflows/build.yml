@@ -1,0 +1,21 @@
+name: Build GBA ROM
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker compose build
+      - name: Build ROM
+        run: docker compose run --rm gba-dev scripts/build.sh
+      - name: Upload ROM
+        uses: actions/upload-artifact@v4
+        with:
+          name: gba-back-home-rom
+          path: gba-back-home.gba
+          if-no-files-found: error
