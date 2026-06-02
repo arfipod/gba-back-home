@@ -1,55 +1,55 @@
-# Diseño de gba-back-home
+# gba-back-home Design
 
-## Fantasía central
+## Core Fantasy
 
-El protagonista no “explora un castillo” exterior: atraviesa una arquitectura interior. Cada mazmorra es una morada del regreso a casa. El objetivo no es conquistar, sino ordenar, recordar y volver.
+The protagonist does not "explore a castle" outside themselves: they cross an inner architecture. Each dungeon is a dwelling on the way back home. The goal is not to conquer, but to order, remember, and return.
 
-## Estructura
+## Structure
 
-Siete moradas:
+Seven dwellings:
 
-1. **Conocimiento propio**: enemigos simples, muchas paredes, aprendizaje.
-2. **Llamada**: más puertas y pasillos largos.
-3. **Disciplina**: enemigos persistentes, menos recursos.
-4. **Quietud**: santuarios más importantes, recursos de fervor.
-5. **Confianza**: llaves alejadas, enemigos tipo sombra.
-6. **Purificación**: enemigos fuertes, castigo por descuido.
-7. **Hogar**: salida final, loop de victoria.
+1. **Self-Knowledge**: simple enemies, many walls, learning.
+2. **Calling**: more doors and long corridors.
+3. **Discipline**: persistent enemies, fewer resources.
+4. **Stillness**: shrines matter more, fervor resources.
+5. **Trust**: distant keys, shadow-type enemies.
+6. **Purification**: strong enemies, punishment for carelessness.
+7. **Home**: final exit, victory loop.
 
-## Sistema procedural actual
+## Current Procedural System
 
-- Se inicializa todo como muro.
-- Un caminante aleatorio excava suelos desde el centro.
-- Cada cierto número de pasos abre una sala pequeña.
-- Se calcula la salida como el tile de suelo más lejano al origen.
-- Se colocan santuario, puertas decorativas, llave, recursos y enemigos en suelos válidos.
-- La clave de peregrino modifica la semilla.
+- The whole map starts as walls.
+- A random walker carves floors from the center.
+- Every fixed number of steps opens a small room.
+- The exit is calculated as the floor tile farthest from the origin.
+- The shrine, decorative doors, key, resources, and enemies are placed on valid floor tiles.
+- The pilgrim key modifies the seed.
 
-## Combate
+## Combat
 
-- **Ataque básico (A)**: golpea una casilla en la última dirección de movimiento.
-- **Oración expansiva (B)**: consume 2 de fervor y daña enemigos a distancia Manhattan <= 2.
-- Enemigos adyacentes dañan al jugador al tomar turno.
-- Sombras se mueven más rápido; bestias hacen más daño.
+- **Basic Attack (A)**: hits one tile in the last movement direction.
+- **Expanding Prayer (B)**: consumes 2 fervor and damages enemies at Manhattan distance <= 2.
+- Adjacent enemies damage the player when taking a turn.
+- Shadows move faster; beasts deal more damage.
 
-## Objetos
+## Items
 
-- **Pan**: cura vida.
-- **Candela**: recupera fervor.
-- **Llave interior**: abre la salida de la morada actual.
-- **Reliquia/memoria**: contador de lore, futuro desbloqueo narrativo.
-- **Santuario**: restaura vida y fervor al pisarlo.
+- **Bread**: heals health.
+- **Candle**: restores fervor.
+- **Inner Key**: opens the current dwelling's exit.
+- **Relic/Memory**: lore counter, future narrative unlock.
+- **Shrine**: restores health and fervor when stepped on.
 
-## Lore original de base
+## Original Lore Baseline
 
-El texto evita sermonear: usa frases breves, casi litúrgicas, para que el jugador complete el sentido durante la exploración. El vocabulario base: puerta, morada, silencio, sombra, llave, casa, Padre, pan, luz, noche, gracia.
+The text avoids preaching: it uses brief, almost liturgical phrases so the player completes the meaning during exploration. The baseline vocabulary is door, dwelling, silence, shadow, key, house, Father, bread, light, night, grace.
 
-## Mejoras previstas
+## Planned Improvements
 
-- Generador por grafo de habitaciones con camino crítico garantizado.
-- Biomas visuales por morada.
-- Enemigos con telemetría simple: patrulla, huida de luz, guardián de llave.
-- Relicario con entradas desbloqueables.
-- SRAM para perfil, estadísticas y progreso.
-- Tilemap/background para liberar sprites.
-- Música por morada con leitmotiv compartido.
+- Graph-based room generator with a guaranteed critical path.
+- Visual biomes per dwelling.
+- Enemies with simple telemetry: patrol, fleeing from light, key guardian.
+- Reliquary with unlockable entries.
+- SRAM for profile, statistics, and progress.
+- Tilemap/background rendering to free sprites.
+- Music per dwelling with a shared leitmotif.

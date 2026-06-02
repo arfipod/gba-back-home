@@ -1,32 +1,32 @@
-# Revisión técnica de Butano aplicada al starter
+# Technical Butano Review Applied To The Starter
 
-## Decisiones tomadas
+## Decisions Made
 
-- Base de proyecto: estructura equivalente al `template/` de Butano, con `src`, `include`, `graphics`, `audio`, `dmg_audio` y `Makefile`.
-- `LIBBUTANO` se resuelve por variable de entorno; en Docker apunta a `/opt/butano/butano`, y fuera de Docker a `vendor/butano/butano`.
-- El importador de Butano requiere assets dentro del binario: los sprites están en `graphics/*.bmp` acompañados por `graphics/*.json`.
-- Los sprites se han creado como BMP indexados 4bpp con color 0 transparente.
-- El texto usa la fuente común de Butano (`common_fixed_8x8_sprite_font`) incorporando `$(LIBBUTANO)/../common/include` y `$(LIBBUTANO)/../common/graphics`.
-- Audio Direct Sound: `audio/pilgrimage.mod` para música Maxmod y varios `*.wav` para SFX.
-- Logging: `USERFLAGS` fija backend mGBA con `BN_LOG`, útil desde mGBA/NanoBoyAdvance/Mesen.
+- Project base: structure equivalent to Butano's `template/`, with `src`, `include`, `graphics`, `audio`, `dmg_audio`, and `Makefile`.
+- `LIBBUTANO` is resolved through an environment variable; in Docker it points to `/opt/butano/butano`, and outside Docker it points to `vendor/butano/butano`.
+- The Butano importer requires assets inside the binary: sprites live in `graphics/*.bmp` with matching `graphics/*.json`.
+- Sprites were created as indexed 4bpp BMPs with transparent color 0.
+- Text uses Butano's common font (`common_fixed_8x8_sprite_font`) by including `$(LIBBUTANO)/../common/include` and `$(LIBBUTANO)/../common/graphics`.
+- Direct Sound audio: `audio/pilgrimage.mod` for Maxmod music and several `*.wav` files for SFX.
+- Logging: `USERFLAGS` sets the mGBA backend with `BN_LOG`, useful in mGBA/NanoBoyAdvance/Mesen.
 
-## Límites GBA relevantes
+## Relevant GBA Limits
 
-- La GBA permite 128 sprites hardware; por eso el mapa se renderiza como ventana de 9x6 tiles mediante sprites, no como mapa completo.
-- Siguiente mejora importante: convertir el mapa visible o el dungeon completo en background/tilemap para liberar sprites a favor de animaciones, partículas, UI y enemigos.
-- La ROM no tiene filesystem: todo asset entra por el pipeline de Butano.
-- Persistencia real de perfil requiere SRAM/EEPROM; el “login” actual es una clave local que alimenta la semilla procedural.
+- The GBA allows 128 hardware sprites; that is why the map is rendered as a 9x6 tile window using sprites, not as a full map.
+- Next important improvement: convert the visible map or full dungeon into a background/tilemap to free sprites for animations, particles, UI, and enemies.
+- The ROM has no filesystem: every asset enters through the Butano pipeline.
+- Real profile persistence requires SRAM/EEPROM; the current "login" is a local key that feeds the procedural seed.
 
-## Integración en Codex
+## Codex Integration
 
-Puntos seguros para editar:
+Safe points to edit:
 
-- `src/main.cpp`: loop jugable y generación procedural.
-- `graphics/*.bmp` y `*.json`: arte temporal.
-- `audio/*.wav` y `audio/*.mod`: SFX/música temporal.
-- `docs/DESIGN.md`: canon de lore y progresión.
+- `src/main.cpp`: playable loop and procedural generation.
+- `graphics/*.bmp` and `*.json`: placeholder art.
+- `audio/*.wav` and `audio/*.mod`: placeholder SFX/music.
+- `docs/DESIGN.md`: lore and progression canon.
 
-Puntos que conviene no tocar sin revisar Butano:
+Points that should not be touched without reviewing Butano:
 
-- `Makefile`: especialmente `LIBBUTANO`, rutas `common` y `AUDIOBACKEND`.
-- `Dockerfile`: cambiar de base devkitPro puede romper `gba-dev`, Maxmod o grit.
+- `Makefile`: especially `LIBBUTANO`, `common` paths, and `AUDIOBACKEND`.
+- `Dockerfile`: changing the devkitPro base can break `gba-dev`, Maxmod, or grit.

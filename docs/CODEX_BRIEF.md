@@ -1,39 +1,39 @@
-# Brief para continuar en Codex
+# Brief For Continuing In Codex
 
-## Objetivo inmediato
+## Immediate Goal
 
-Convertir este starter en un vertical slice sólido: una morada jugable de 3-5 minutos con combate claro, arte coherente, un jefe simple y cierre narrativo.
+Turn this starter into a solid vertical slice: one playable 3-5 minute dwelling with clear combat, coherent art, a simple boss, and a narrative ending.
 
-## Prioridades técnicas
+## Technical Priorities
 
-1. **Compilar en Docker** y corregir cualquier incompatibilidad de versión de Butano/devkitPro.
-2. Sustituir render de tiles por background/tilemap procedural.
-3. Separar `src/main.cpp` en módulos:
+1. **Compile in Docker** and fix any Butano/devkitPro version incompatibilities.
+2. Replace sprite-based tile rendering with a procedural background/tilemap.
+3. Split `src/main.cpp` into modules:
    - `dungeon_generator.*`
    - `combat.*`
    - `entities.*`
    - `ui.*`
    - `audio_manager.*`
    - `profile.*`
-4. Añadir SRAM para perfil real.
-5. Añadir animaciones de sprites y cooldown visual.
-6. Crear tests host-side para el generador procedural usando el mismo algoritmo en C++ portable.
+4. Add SRAM for a real profile.
+5. Add sprite animations and visual cooldowns.
+6. Create host-side tests for the procedural generator using the same algorithm in portable C++.
 
-## Prioridades de diseño
+## Design Priorities
 
-1. Hacer que cada morada tenga una regla jugable propia.
-2. Garantizar que llave y salida siempre sean alcanzables.
-3. Convertir reliquias en fragmentos de lore persistentes.
-4. Añadir al menos tres patrones de enemigos:
-   - duda: persigue lento;
-   - sombra: se mueve rápido, poca vida;
-   - bestia: guardián de puerta, mucha vida.
-5. Añadir un jefe final: “La puerta falsa”, que se vence evitando atacar durante ventanas de silencio.
+1. Give each dwelling its own gameplay rule.
+2. Guarantee that the key and exit are always reachable.
+3. Turn relics into persistent lore fragments.
+4. Add at least three enemy patterns:
+   - doubt: slow pursuer;
+   - shadow: fast movement, low health;
+   - beast: door guardian, high health.
+5. Add a final boss, "The False Door", defeated by avoiding attacks during windows of silence.
 
-## Criterios de aceptación
+## Acceptance Criteria
 
-- `docker compose run --rm gba-dev scripts/build.sh` genera `gba-back-home.gba`.
-- `scripts/run-rom.sh` abre mGBA vía noVNC.
-- La partida llega desde título hasta victoria sin cuelgues.
-- No se superan 128 sprites visibles.
-- El mapa nunca encierra la llave o la salida.
+- `docker compose run --rm gba-dev scripts/build.sh` generates `gba-back-home.gba`.
+- `scripts/run-rom.sh` opens mGBA through noVNC.
+- The game can go from title to victory without hangs.
+- Visible sprites never exceed 128.
+- The map never traps the key or exit.

@@ -1,10 +1,10 @@
-# Pipeline de assets
+# Asset Pipeline
 
-## Gráficos
+## Graphics
 
-Butano espera imágenes en `graphics/` acompañadas por un JSON del mismo nombre.
+Butano expects images in `graphics/` with a JSON file of the same name.
 
-Ejemplo:
+Example:
 
 ```json
 {
@@ -16,15 +16,15 @@ Ejemplo:
 }
 ```
 
-Reglas del starter:
+Starter rules:
 
-- BMP sin compresión.
-- Paleta indexada de 16 colores.
-- Color 0 = transparente.
-- Sprites principales de 16x16.
-- `attack_wave` y `logo_cross` de 32x32.
+- Uncompressed BMP.
+- Indexed 16-color palette.
+- Color 0 = transparent.
+- Main sprites are 16x16.
+- `attack_wave` and `logo_cross` are 32x32.
 
-Al compilar, Butano genera cabeceras como:
+When compiling, Butano generates headers such as:
 
 ```cpp
 #include "bn_sprite_items_player.h"
@@ -32,14 +32,14 @@ Al compilar, Butano genera cabeceras como:
 
 ## Audio
 
-- Música Direct Sound en `audio/*.mod`.
-- SFX en `audio/*.wav`.
-- WAV recomendados: mono, 8-bit, 22050 Hz.
-- El starter usa Maxmod (`AUDIOBACKEND := maxmod`).
+- Direct Sound music in `audio/*.mod`.
+- SFX in `audio/*.wav`.
+- Recommended WAV format: mono, 8-bit, 22050 Hz.
+- The starter uses Maxmod (`AUDIOBACKEND := maxmod`).
 
-## Consejos para producción
+## Production Tips
 
-- Edita sprites en Usenti/Aseprite/GIMP, pero verifica que el BMP final sea paletizado real.
-- Mantén paletas pequeñas y compartidas por familia visual.
-- Evita demasiados sprites simultáneos: la GBA tiene 128 sprites hardware.
-- Cambia tiles estáticos a backgrounds cuanto antes.
+- Edit sprites in Usenti/Aseprite/GIMP, but verify that the final BMP is truly palettized.
+- Keep palettes small and shared by visual family.
+- Avoid too many simultaneous sprites: the GBA has 128 hardware sprites.
+- Move static tiles to backgrounds as soon as possible.

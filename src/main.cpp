@@ -169,20 +169,20 @@ namespace
     }
 
     constexpr const char* profile_names[] = {
-        "FIDES",
-        "SPES",
-        "CARITAS",
-        "PAX"
+        "FAITH",
+        "HOPE",
+        "CHARITY",
+        "PEACE"
     };
 
-    constexpr const char* morada_lore[] = {
-        "I  La puerta es conocerse.",
-        "II La voz llama desde lejos.",
-        "III La disciplina hace camino.",
-        "IV El agua llega sin ruido.",
-        "V  La herida aprende a confiar.",
-        "VI La noche purifica el deseo.",
-        "VII La casa se vuelve hogar."
+    constexpr const char* dwelling_lore[] = {
+        "I  The door is self-knowledge.",
+        "II The voice calls from afar.",
+        "III Discipline makes the path.",
+        "IV Water arrives without noise.",
+        "V  The wound learns to trust.",
+        "VI Night purifies desire.",
+        "VII The house becomes home."
     };
 
     class game
@@ -251,7 +251,7 @@ namespace
         int _attack_timer = 0;
         int _message_timer = 0;
         bool _has_key = false;
-        const char* _message = "Busca la puerta interior.";
+        const char* _message = "Seek the inner door.";
 
         void clear_scene()
         {
@@ -296,11 +296,11 @@ namespace
             _text_sprites.clear();
             _text_generator.set_center_alignment();
             _text_generator.generate(0, -64, "GBA BACK HOME", _text_sprites);
-            _text_generator.generate(0, -46, "Camino al Padre", _text_sprites);
-            _text_generator.generate(0, -20, "Dungeon crawler procedural", _text_sprites);
-            _text_generator.generate(0, 4, "A: entrar", _text_sprites);
-            _text_generator.generate(0, 18, "B: semilla rapida", _text_sprites);
-            _text_generator.generate(0, 48, "START: nuevo peregrino", _text_sprites);
+            _text_generator.generate(0, -46, "Road to the Father", _text_sprites);
+            _text_generator.generate(0, -20, "Procedural dungeon crawler", _text_sprites);
+            _text_generator.generate(0, 4, "A: enter", _text_sprites);
+            _text_generator.generate(0, 18, "B: quick seed", _text_sprites);
+            _text_generator.generate(0, 48, "START: new pilgrim", _text_sprites);
         }
 
         void update_title()
@@ -323,12 +323,12 @@ namespace
         {
             _text_sprites.clear();
             _text_generator.set_center_alignment();
-            _text_generator.generate(0, -64, "ACCESO DEL PEREGRINO", _text_sprites);
-            _text_generator.generate(0, -42, "Elige una clave local", _text_sprites);
+            _text_generator.generate(0, -64, "PILGRIM ACCESS", _text_sprites);
+            _text_generator.generate(0, -42, "Choose a local key", _text_sprites);
             _text_generator.generate(0, -8, profile_names[_profile_index], _text_sprites);
-            _text_generator.generate(0, 20, "LEFT/RIGHT cambia", _text_sprites);
-            _text_generator.generate(0, 34, "A confirma", _text_sprites);
-            _text_generator.generate(0, 58, "Sin red: perfil en ROM", _text_sprites);
+            _text_generator.generate(0, 20, "LEFT/RIGHT changes", _text_sprites);
+            _text_generator.generate(0, 34, "A confirms", _text_sprites);
+            _text_generator.generate(0, 58, "Offline: ROM profile", _text_sprites);
         }
 
         void update_login()
@@ -363,12 +363,12 @@ namespace
         {
             _text_sprites.clear();
             _text_generator.set_center_alignment();
-            _text_generator.generate(0, -66, "CASTILLO INTERIOR", _text_sprites);
+            _text_generator.generate(0, -66, "INNER CASTLE", _text_sprites);
             _text_generator.generate(0, -42, profile_names[_profile_index], _text_sprites);
-            _text_generator.generate(0, -14, morada_lore[_floor - 1], _text_sprites);
-            _text_generator.generate(0, 16, "Cada sala limpia una sombra.", _text_sprites);
-            _text_generator.generate(0, 34, "A: descender", _text_sprites);
-            _text_generator.generate(0, 54, "B: volver", _text_sprites);
+            _text_generator.generate(0, -14, dwelling_lore[_floor - 1], _text_sprites);
+            _text_generator.generate(0, 16, "Each room clears a shadow.", _text_sprites);
+            _text_generator.generate(0, 34, "A: descend", _text_sprites);
+            _text_generator.generate(0, 54, "B: return", _text_sprites);
         }
 
         void update_lore()
@@ -664,7 +664,7 @@ namespace
         void enter_dungeon_floor()
         {
             _has_key = false;
-            _message = morada_lore[_floor - 1];
+            _message = dwelling_lore[_floor - 1];
             _message_timer = 150;
             _attack_timer = 0;
             generate_dungeon();
@@ -858,7 +858,7 @@ namespace
             }
             else if(bn::keypad::start_pressed())
             {
-                set_message("La morada se rehace.", 80);
+                set_message("The dwelling reforms.", 80);
                 generate_dungeon();
                 refresh_view();
                 refresh_entities();
@@ -918,7 +918,7 @@ namespace
             if(! is_walkable(next_x, next_y))
             {
                 bn::sound_items::hit.play(0.45);
-                set_message("Piedra cerrada.", 50);
+                set_message("Closed stone.", 50);
                 return true;
             }
 
@@ -926,7 +926,7 @@ namespace
             if(next_tile == tile_kind::exit && !_has_key)
             {
                 bn::sound_items::door.play(0.5);
-                set_message("Falta la llave.", 70);
+                set_message("The key is missing.", 70);
                 return true;
             }
 
@@ -939,7 +939,7 @@ namespace
             {
                 _hp = max_hp;
                 _fervor = max_fervor;
-                set_message("Silencio: vida restaurada.", 90);
+                set_message("Silence: life restored.", 90);
                 bn::sound_items::prayer.play(0.8);
             }
             else if(next_tile == tile_kind::exit)
@@ -969,7 +969,7 @@ namespace
                 {
                     _hp = max_hp;
                 }
-                set_message("Pan del camino.", 75);
+                set_message("Bread for the road.", 75);
                 break;
             case item_kind::candle:
                 _fervor += 2;
@@ -977,15 +977,15 @@ namespace
                 {
                     _fervor = max_fervor;
                 }
-                set_message("Luz recibida.", 75);
+                set_message("Light received.", 75);
                 break;
             case item_kind::key:
                 _has_key = true;
-                set_message("Llave interior hallada.", 90);
+                set_message("Inner key found.", 90);
                 break;
             case item_kind::relic:
                 ++_relics;
-                set_message("Memoria de gracia.", 90);
+                set_message("Memory of grace.", 90);
                 break;
             }
 
@@ -1003,11 +1003,11 @@ namespace
             if(enemy_index >= 0)
             {
                 damage_enemy(enemy_index, 1);
-                set_message("Golpe de decision.", 55);
+                set_message("Strike of resolve.", 55);
             }
             else
             {
-                set_message("El golpe corta sombra.", 40);
+                set_message("The strike cuts shadow.", 40);
             }
         }
 
@@ -1015,7 +1015,7 @@ namespace
         {
             if(_fervor < 2)
             {
-                set_message("Falta fervor.", 60);
+                set_message("Not enough fervor.", 60);
                 bn::sound_items::hit.play(0.45);
                 return;
             }
@@ -1039,11 +1039,11 @@ namespace
 
             if(hits > 0)
             {
-                set_message("Oracion expansiva.", 70);
+                set_message("Expanding prayer.", 70);
             }
             else
             {
-                set_message("La oracion prepara.", 60);
+                set_message("Prayer prepares.", 60);
             }
         }
 
@@ -1089,7 +1089,7 @@ namespace
                 {
                     int damage = current_enemy.kind == enemy_kind::beast ? 2 : 1;
                     _hp -= damage;
-                    set_message("La sombra hiere.", 60);
+                    set_message("The shadow wounds.", 60);
                     bn::sound_items::hit.play(0.65);
                     continue;
                 }
@@ -1162,11 +1162,11 @@ namespace
         {
             _text_sprites.clear();
             _text_generator.set_center_alignment();
-            _text_generator.generate(0, -58, "HAS VUELTO A CASA", _text_sprites);
-            _text_generator.generate(0, -26, "La puerta no era lejos.", _text_sprites);
-            _text_generator.generate(0, -10, "Era honda.", _text_sprites);
-            _text_generator.generate(0, 20, "START: otra peregrinacion", _text_sprites);
-            _text_generator.generate(0, 42, "B: titulo", _text_sprites);
+            _text_generator.generate(0, -58, "YOU HAVE COME HOME", _text_sprites);
+            _text_generator.generate(0, -26, "The door was not far.", _text_sprites);
+            _text_generator.generate(0, -10, "It was deep.", _text_sprites);
+            _text_generator.generate(0, 20, "START: another pilgrimage", _text_sprites);
+            _text_generator.generate(0, 42, "B: title", _text_sprites);
             BN_LOG("victory turns ", _turns, " relics ", _relics);
         }
 
@@ -1191,11 +1191,11 @@ namespace
         {
             _text_sprites.clear();
             _text_generator.set_center_alignment();
-            _text_generator.generate(0, -58, "NOCHE INTERIOR", _text_sprites);
-            _text_generator.generate(0, -26, "Caer no es perderse.", _text_sprites);
-            _text_generator.generate(0, -10, "Vuelve a llamar.", _text_sprites);
-            _text_generator.generate(0, 24, "A: reintentar morada", _text_sprites);
-            _text_generator.generate(0, 44, "B: titulo", _text_sprites);
+            _text_generator.generate(0, -58, "INNER NIGHT", _text_sprites);
+            _text_generator.generate(0, -26, "Falling is not being lost.", _text_sprites);
+            _text_generator.generate(0, -10, "Call again.", _text_sprites);
+            _text_generator.generate(0, 24, "A: retry dwelling", _text_sprites);
+            _text_generator.generate(0, 44, "B: title", _text_sprites);
             BN_LOG("defeat floor ", _floor, " turns ", _turns);
         }
 
