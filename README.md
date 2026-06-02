@@ -62,6 +62,38 @@ The game contains Spanish and English text. Press `SELECT` on the title, pilgrim
 
 Documentation is intentionally kept in English.
 
+## Screenshots
+
+The following screenshots were captured from the built ROM running in mGBA through the included noVNC environment.
+
+### Bilingual Title Screen
+
+![Spanish title screen with the pilgrimage start prompt and language switch](docs/screenshots/title-es.png)
+
+The default Spanish title screen introduces the interior roguelike theme, exposes the main start action, and shows `SELECT: English` as the runtime language toggle.
+
+![English title screen with the same start options and Spanish language switch](docs/screenshots/title-en.png)
+
+After pressing `SELECT`, the same screen is redrawn in English. This verifies that the title flow is not a separate mock screen: the game swaps localized strings while staying in the same menu state.
+
+### Pilgrim Selection
+
+![English pilgrim selection screen highlighting Faith and its max light rule](docs/screenshots/pilgrim-selection-en.png)
+
+The pilgrim selection screen shows the active archetype, its mechanical rule, and the localized controls. `LEFT` and `RIGHT` cycle between Faith, Hope, Charity, and Peace before confirming the run.
+
+### Dwelling Introduction
+
+![First dwelling introduction screen for Faith in English](docs/screenshots/dwelling-intro-en.png)
+
+Before entering each dwelling, the game presents the selected pilgrim, the current interior dwelling, the rule for that stage, and the reminder that `R` is silence while `L` recalls memory.
+
+### Dungeon Exploration
+
+![Dungeon exploration view with HP, light, dwelling, memory, mercy, and centered room tiles](docs/screenshots/dungeon-exploration-en.png)
+
+The dungeon view uses a compact GBA HUD: HP appears on the left, light and maximum light sit beside it, the current dwelling is shown as a Roman numeral, and memory/mercy counters are shown on the right. The center viewport follows the pilgrim through the procedural room layout.
+
 ## Controls
 
 | Button | Action |
