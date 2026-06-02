@@ -1,32 +1,45 @@
 # Technical Butano Review Applied To The Starter
 
-## Decisions Made
+## Project Decisions
 
-- Project base: structure equivalent to Butano's `template/`, with `src`, `include`, `graphics`, `audio`, `dmg_audio`, and `Makefile`.
-- `LIBBUTANO` is resolved through an environment variable; in Docker it points to `/opt/butano/butano`, and outside Docker it points to `vendor/butano/butano`.
-- The Butano importer requires assets inside the binary: sprites live in `graphics/*.bmp` with matching `graphics/*.json`.
-- Sprites were created as indexed 4bpp BMPs with transparent color 0.
-- Text uses Butano's common font (`common_fixed_8x8_sprite_font`) by including `$(LIBBUTANO)/../common/include` and `$(LIBBUTANO)/../common/graphics`.
-- Direct Sound audio: `audio/pilgrimage.mod` for Maxmod music and several `*.wav` files for SFX.
-- Logging: `USERFLAGS` sets the mGBA backend with `BN_LOG`, useful in mGBA/NanoBoyAdvance/Mesen.
+- Project base follows Butano's template layout: `src`, `include`, `graphics`, `audio`, `dmg_audio`, `Makefile`.
+- `LIBBUTANO` is resolved through an environment variable; Docker points to `/opt/butano/butano`, local fallback is `vendor/butano/butano`.
+- Text uses Butano's common fixed 8x8 sprite font through `$(LIBBUTANO)/../common/include` and `$(LIBBUTANO)/../common/graphics`.
+- Direct Sound audio uses `audio/pilgrimage.mod` and SFX WAV files with Maxmod.
+- Logging is enabled for mGBA with `BN_LOG` through `USERFLAGS`.
 
-## Relevant GBA Limits
+## Important GBA Limits
 
-- The GBA allows 128 hardware sprites; that is why the map is rendered as a 9x6 tile window using sprites, not as a full map.
-- Next important improvement: convert the visible map or full dungeon into a background/tilemap to free sprites for animations, particles, UI, and enemies.
-- The ROM has no filesystem: every asset enters through the Butano pipeline.
-- Real profile persistence requires SRAM/EEPROM; the current "login" is a local key that feeds the procedural seed.
+- GBA has 128 hardware sprites.
+- Current dungeon uses sprite tiles: 9x6 = 54 sprites.
+- Enemies, items, player, effects and text share the same OAM budget.
+- Keep HUD and message text short.
+- The next major technical upgrade should move map rendering to a background/tilemap.
 
-## Codex Integration
+## Added Gameplay Assets
 
-Safe points to edit:
+The design pass added directional player sprites, silence/false-door tiles, new enemies and a boss. Each has a matching JSON file for the Butano importer.
 
-- `src/main.cpp`: playable loop and procedural generation.
-- `graphics/*.bmp` and `*.json`: placeholder art.
-- `audio/*.wav` and `audio/*.mod`: placeholder SFX/music.
-- `docs/DESIGN.md`: lore and progression canon.
+## Debug vs Release
 
-Points that should not be touched without reviewing Butano:
+- START now pauses during dungeon play.
+- Floor regeneration is only behind `GBH_DEBUG` with `L+R+START`.
+- To enable debug regeneration:
 
-- `Makefile`: especially `LIBBUTANO`, `common` paths, and `AUDIOBACKEND`.
-- `Dockerfile`: changing the devkitPro base can break `gba-dev`, Maxmod, or grit.
+```make
+USERFLAGS := -DGBH_DEBUG -DBN_CFG_LOG_ENABLED=true -DBN_CFG_LOG_BACKEND=BN_LOG_BACKEND_MGBA
+```
+
+## Safe Points To Edit
+
+- `src/main.cpp`: gameplay loop, generator, combat, boss, UI.
+- `graphics/*.bmp` and `graphics/*.json`: placeholder art.
+- `audio/*.wav` and `audio/*.mod`: placeholder audio.
+- `docs/DESIGN.md`: lore and design canon.
+- `tools/procedural_smoke_test.py`: host-side model for generator validation.
+
+## Points To Treat Carefully
+
+- `Makefile`: especially `LIBBUTANO`, common paths and audio backend.
+- `Dockerfile`: changing the devkitPro base can break devkitARM, grit or Maxmod.
+- Long text strings in dungeon: they can exceed hardware sprites.

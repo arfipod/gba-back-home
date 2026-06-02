@@ -1,39 +1,62 @@
 # Brief For Continuing In Codex
 
-## Immediate Goal
+## Current State
 
-Turn this starter into a solid vertical slice: one playable 3-5 minute dwelling with clear combat, coherent art, a simple boss, and a narrative ending.
+This repository is now a larger design slice instead of the original bare starter. The game has seven dwellings, pilgrim profiles, a room/corridor procedural generator, BFS placement for key/exit, safe start rules, prayer, silence, false doors, silence doors, exhausted shrines, memories, five enemy roles and a final boss.
 
-## Technical Priorities
+## First Goal
 
-1. **Compile in Docker** and fix any Butano/devkitPro version incompatibilities.
-2. Replace sprite-based tile rendering with a procedural background/tilemap.
-3. Split `src/main.cpp` into modules:
+Make the project compile cleanly in Docker, run it in mGBA, and playtest the whole title-to-victory path. Fix any Butano import, sprite, audio or API mismatch before adding new features.
+
+## Immediate Acceptance Criteria
+
+- `docker compose run --rm gba-dev scripts/build.sh` generates `gba-back-home.gba`.
+- `scripts/run-rom.sh` opens the ROM in mGBA through noVNC.
+- The game can reach victory from title without hangs.
+- Visible sprites never exceed the 128 hardware sprite limit.
+- Key and exit are reachable for all tested seeds.
+- START pauses in release; regeneration only exists behind `GBH_DEBUG`.
+
+## Technical Priority Order
+
+1. **Compile and fix API mismatches**: especially new sprite item names, keypad helpers, text sprite counts and audio item names.
+2. **Run procedural smoke test**:
+   ```bash
+   python3 tools/procedural_smoke_test.py --seeds 1000
+   ```
+3. **Verify OAM budget** in emulator. The map still uses 9x6 sprite tiles, so text lines must remain short.
+4. **Move dungeon map to background/tilemap**. This frees sprites for animation, particles and richer UI.
+5. Split `src/main.cpp` into modules:
+   - `profile.*`
    - `dungeon_generator.*`
    - `combat.*`
    - `entities.*`
    - `ui.*`
+   - `boss_false_door.*`
    - `audio_manager.*`
-   - `profile.*`
-4. Add SRAM for a real profile.
-5. Add sprite animations and visual cooldowns.
-6. Create host-side tests for the procedural generator using the same algorithm in portable C++.
+6. Add SRAM for profile, reliquary and options.
+7. Add sprite animations and hurt/attack telegraphs.
+8. Add automated host-side tests for the exact C++ generator once it is modularized.
 
-## Design Priorities
+## Design Priority Order
 
-1. Give each dwelling its own gameplay rule.
-2. Guarantee that the key and exit are always reachable.
-3. Turn relics into persistent lore fragments.
-4. Add at least three enemy patterns:
-   - doubt: slow pursuer;
-   - shadow: fast movement, low health;
-   - beast: door guardian, high health.
-5. Add a final boss, "The False Door", defeated by avoiding attacks during windows of silence.
+1. Polish Morada I as a perfect 3-5 minute vertical slice.
+2. Give each morada stronger room grammar, not just parameter changes.
+3. Make silence/espera feel valuable and risky.
+4. Improve false door telegraphing so it is fair, not random-feeling.
+5. Convert memories into a reliquary screen.
+6. Add final-boss readability: clear noise/silence cycle.
+7. Add pacification feedback for CARIDAD.
+8. Balance shrines so they feel like a commitment, not a free refill.
 
-## Acceptance Criteria
+## Known Fragile Points
 
-- `docker compose run --rm gba-dev scripts/build.sh` generates `gba-back-home.gba`.
-- `scripts/run-rom.sh` opens mGBA through noVNC.
-- The game can go from title to victory without hangs.
-- Visible sprites never exceed 128.
-- The map never traps the key or exit.
+- `src/main.cpp` is intentionally still monolithic. It is easier to review now, but should be split after the first successful build.
+- Butano text uses sprites; long text lines can exceed OAM during dungeon scenes.
+- New BMP assets are placeholder art. They are 4bpp indexed with JSON metadata.
+- The procedural smoke test mirrors the generator conceptually, but the C++ source is the game authority.
+- The boss is a design prototype: refine timing, feedback and damage after playtesting.
+
+## Suggested First Codex Prompt
+
+"Compile this Butano project in the provided Docker environment. Fix all build errors without changing the intended game design. Prioritize asset importer names, Butano API mismatches, and sprite/text budget. Then run the ROM in mGBA and report the first playable issues."

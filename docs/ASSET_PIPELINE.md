@@ -1,45 +1,100 @@
 # Asset Pipeline
 
-## Graphics
+## Butano Import Shape
 
-Butano expects images in `graphics/` with a JSON file of the same name.
+Butano imports assets that are inside the repository at build time. This project keeps placeholder art in `graphics/` as indexed BMP files, each with a matching JSON metadata file.
 
 Example:
 
-```json
-{
-  "type": "sprite",
-  "width": 16,
-  "height": 16,
-  "bpp_mode": "bpp_4",
-  "colors_count": 16
-}
+```text
+graphics/player_down.bmp
+graphics/player_down.json
 ```
 
-Starter rules:
-
-- Uncompressed BMP.
-- Indexed 16-color palette.
-- Color 0 = transparent.
-- Main sprites are 16x16.
-- `attack_wave` and `logo_cross` are 32x32.
-
-When compiling, Butano generates headers such as:
+The generated C++ include becomes:
 
 ```cpp
-#include "bn_sprite_items_player.h"
+#include "bn_sprite_items_player_down.h"
 ```
+
+and the sprite item is used as:
+
+```cpp
+bn::sprite_items::player_down.create_sprite(0, 0);
+```
+
+## Current Sprite Set
+
+### Tiles
+
+- `tile_floor`
+- `tile_wall`
+- `tile_door`
+- `tile_door_false`
+- `tile_door_silence`
+- `tile_silence`
+- `tile_shrine`
+- `tile_shrine_spent`
+- `tile_exit`
+
+### Player
+
+- `player_down`
+- `player_up`
+- `player_left`
+- `player_right`
+
+### Enemies
+
+- `enemy_doubt`
+- `enemy_shadow`
+- `enemy_beast`
+- `enemy_noise`
+- `enemy_haste`
+- `boss_false_door`
+
+### Items / Effects
+
+- `item_bread`
+- `item_candle`
+- `item_key`
+- `item_relic` used as memory icon
+- `attack_wave`
+
+## Format Requirements
+
+- BMP indexed/palettized.
+- 4bpp mode expected by JSON.
+- 16 colors.
+- Palette index 0 reserved for transparency.
+- Most sprites are 16x16.
+- `attack_wave` and `boss_false_door` are 32x32.
+
+## Regenerating Placeholder Art
+
+```bash
+python3 tools/generate_assets.py
+```
+
+This regenerates the placeholder sprites as 4bpp BMP files. It is not a final art pipeline; final art should come from Aseprite, Usenti or a similar indexed-palette workflow.
 
 ## Audio
 
-- Direct Sound music in `audio/*.mod`.
-- SFX in `audio/*.wav`.
-- Recommended WAV format: mono, 8-bit, 22050 Hz.
-- The starter uses Maxmod (`AUDIOBACKEND := maxmod`).
+- `audio/pilgrimage.mod` is the placeholder MOD soundtrack.
+- `audio/*.wav` files are SFX.
+- The Makefile uses `AUDIOBACKEND := maxmod`.
 
-## Production Tips
+## OAM Budget Warning
 
-- Edit sprites in Usenti/Aseprite/GIMP, but verify that the final BMP is truly palettized.
-- Keep palettes small and shared by visual family.
-- Avoid too many simultaneous sprites: the GBA has 128 hardware sprites.
-- Move static tiles to backgrounds as soon as possible.
+The dungeon currently renders the visible map as a 9x6 sprite window:
+
+```text
+54 tile sprites
++ 8 enemy sprites
++ 8 item sprites
++ 1 player sprite
++ 1 attack sprite
++ text sprites
+```
+
+This is close to the GBA hardware sprite limit when long messages are shown. Keep in-game messages short until the map is moved to a background/tilemap.
