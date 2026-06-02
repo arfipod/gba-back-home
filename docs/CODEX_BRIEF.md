@@ -4,6 +4,23 @@
 
 This repository is now a larger design slice instead of the original bare starter. The game has seven dwellings, pilgrim profiles, a room/corridor procedural generator, BFS placement for key/exit, safe start rules, prayer, silence, false doors, silence doors, exhausted shrines, memories, five enemy roles and a final boss.
 
+The first playable ROM has been published as GitHub release `v0.1.0`:
+
+```text
+https://github.com/arfipod/gba-back-home/releases/tag/v0.1.0
+```
+
+Repeat the release flow with:
+
+```bash
+gh auth login
+gh release create v0.1.0 gba-back-home.gba \
+  --repo arfipod/gba-back-home \
+  --target main \
+  --title "gba-back-home v0.1.0" \
+  --notes "First playable GBA ROM release."
+```
+
 ## First Goal
 
 Make the project compile cleanly in Docker, run it in mGBA, and playtest the whole title-to-victory path. Fix any Butano import, sprite, audio or API mismatch before adding new features.

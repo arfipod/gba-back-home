@@ -146,6 +146,25 @@ python3 tools/procedural_smoke_test.py --seeds 1000
 
 It does not replace the Butano build, but it helps catch procedural design regressions.
 
+## Release
+
+The first playable ROM was published as GitHub release `v0.1.0`:
+
+```text
+https://github.com/arfipod/gba-back-home/releases/tag/v0.1.0
+```
+
+The release was created with GitHub CLI after browser authentication:
+
+```bash
+gh auth login
+gh release create v0.1.0 gba-back-home.gba \
+  --repo arfipod/gba-back-home \
+  --target main \
+  --title "gba-back-home v0.1.0" \
+  --notes "First playable GBA ROM release."
+```
+
 ## Recommended Next Work
 
 1. Playtest 30-50 seeds per dwelling.
